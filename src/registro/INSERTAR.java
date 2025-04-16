@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package registro;
-
+import javax.swing.JOptionPane;
 import java.sql.*;
 
 /**
@@ -15,8 +15,10 @@ public class INSERTAR extends javax.swing.JFrame {
     /**
      * Creates new form INSERTAR
      */
+    
     public INSERTAR() {
         initComponents();
+        
     }
 
     /**
@@ -163,12 +165,29 @@ public class INSERTAR extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
 
     private void insertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertarActionPerformed
         String textdni = dni.getText();
         String textnombre = nombre.getText();
         String textapellido = apellido.getText();
         String textcodigo = codigo.getText();
+        if(!textdni.matches("\\d+")){
+            JOptionPane.showMessageDialog(this, "El campo DNI debe contener solo números");
+            return;
+        }
+        if(!textnombre.matches("[a-zA-Z ]+")){
+            JOptionPane.showMessageDialog(this, "El campo NOMBRE debe contener solo letras");
+            return;
+        }
+        if(!textapellido.matches("[a-zA-Z ]+")){
+            JOptionPane.showMessageDialog(this, "El campo APELLIDO debe contener solo letras");
+            return;
+        }
+        if(!textcodigo.matches("\\d+")){
+            JOptionPane.showMessageDialog(this, "El campo DNI debe contener solo números");
+            return;
+        }
         try (Connection conn = conexion.getconexion()) {
             String sql = "insert into usuarios values (?,?,?,?)";
             java.sql.PreparedStatement enviar = conn.prepareStatement(sql);
@@ -180,7 +199,6 @@ public class INSERTAR extends javax.swing.JFrame {
             int tupla = enviar.executeUpdate();
             if (tupla > 0) {
                 javax.swing.JOptionPane.showMessageDialog(this, "Usuario registrado con exito");
-                // Limpiar los campos después de editar
                 dni.setText("");
                 nombre.setText("");
                 apellido.setText("");
@@ -191,6 +209,7 @@ public class INSERTAR extends javax.swing.JFrame {
         } catch (Exception e) {
             javax.swing.JOptionPane.showMessageDialog(this, "Error" + e.getMessage());
         }
+        
     }//GEN-LAST:event_insertarActionPerformed
 
     private void mostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarActionPerformed
