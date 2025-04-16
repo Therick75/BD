@@ -137,6 +137,10 @@ public class ELIMINAR extends javax.swing.JFrame {
 
     private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
         String txtdni = dni.getText();
+        if(!txtdni.matches("\\d+")){
+            JOptionPane.showMessageDialog(this, "El campo DNI debe contener solo números");
+            return;
+        }
         if (txtdni.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Por favor ingresa el DNI.");
             return;

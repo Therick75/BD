@@ -171,6 +171,22 @@ public class EDITAR extends javax.swing.JFrame {
         String txtnombre = nombre.getText();
         String txtapellido = apellido.getText();
         String txtcodigo = codigo.getText();
+        if(!txtdni.matches("\\d+")){
+            JOptionPane.showMessageDialog(this, "El campo DNI debe contener solo números");
+            return;
+        }
+        if(!txtnombre.matches("[a-zA-Z ]+")){
+            JOptionPane.showMessageDialog(this, "El campo NOMBRE debe contener solo letras");
+            return;
+        }
+        if(!txtapellido.matches("[a-zA-Z ]+")){
+            JOptionPane.showMessageDialog(this, "El campo APELLIDO debe contener solo letras");
+            return;
+        }
+        if(!txtcodigo.matches("\\d+")){
+            JOptionPane.showMessageDialog(this, "El campo DNI debe contener solo números");
+            return;
+        }
 
         if (txtdni.isEmpty() || txtnombre.isEmpty() || txtapellido.isEmpty() || txtcodigo.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios.");
